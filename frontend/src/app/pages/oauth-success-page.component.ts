@@ -19,12 +19,14 @@ export class OAuthSuccessPageComponent {
     const token = this.route.snapshot.queryParamMap.get('token') ?? localStorage.getItem(AUTH_TOKEN_KEY);
     const success = this.auth.handleOAuthToken(token);
 
+    this.auth.refreshFromStorage();
+
     this.statusMessage.set(
       success ? 'Secure session ready. Taking you to the dashboard...' : 'No token was found. Returning to login.'
     );
 
     window.setTimeout(() => {
-      void this.router.navigate([success ? '/dashboard' : '/auth/login']);
+      void this.router.navigate([success ? '/dashboard' : '/auth/login'], { replaceUrl: true });
     }, 1200);
   }
 }

@@ -69,7 +69,9 @@
 
     if (token && authTokenKey) {
       localStorage.setItem(authTokenKey, token);
-      window.location.replace('/auth/oauth-success');
+      const next = new URL('/auth/oauth-success', window.location.origin);
+      next.searchParams.set('token', token);
+      window.location.replace(next.toString());
     } else {
       window.location.replace('/auth/login');
     }
