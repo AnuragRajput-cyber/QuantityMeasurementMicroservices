@@ -1,0 +1,83 @@
+<section class="auth-page">
+  <div class="auth-copy">
+    <p class="eyebrow">Gateway-secured workspace</p>
+    <h1>Operate your quantity engine from one calm, fast command center.</h1>
+    <p class="lede">
+      Sign in with your local account or jump in with Google OAuth through the API gateway.
+      Your dashboard is ready to convert, compare, divide, and track measurements instantly.
+    </p>
+
+    <div class="feature-grid">
+      <article>
+        <span>01</span>
+        <h2>Single login surface</h2>
+        <p>Local JWT auth and Google OAuth share one polished flow.</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h2>Protected QMA tools</h2>
+        <p>Every quantity action routes through your secured gateway on port 8080.</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h2>Dark cockpit feel</h2>
+        <p>Gradient glass panels keep the workspace bold without getting noisy.</p>
+      </article>
+    </div>
+  </div>
+
+  <div class="auth-card panel">
+    <div class="card-header">
+      <p class="eyebrow">Welcome back</p>
+      <h2>Log in</h2>
+      <p>Use the same account you created in `auth-service`, or continue with Google.</p>
+    </div>
+
+    <button type="button" class="google-button" (click)="loginWithGoogle()">
+      <span class="google-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path fill="#ea4335" d="M12 10.2v3.9h5.4c-.2 1.2-.9 2.2-1.9 2.9l3.1 2.4c1.8-1.7 2.9-4.1 2.9-7 0-.7-.1-1.4-.2-2.1H12Z"/>
+          <path fill="#34a853" d="M12 21c2.6 0 4.8-.9 6.4-2.4l-3.1-2.4c-.9.6-2 .9-3.3.9-2.5 0-4.6-1.7-5.4-4H3.4v2.5A9.6 9.6 0 0 0 12 21Z"/>
+          <path fill="#4285f4" d="M6.6 13.1a5.8 5.8 0 0 1 0-3.7V6.9H3.4a9.6 9.6 0 0 0 0 8.7l3.2-2.5Z"/>
+          <path fill="#fbbc05" d="M12 4.8c1.4 0 2.7.5 3.7 1.4l2.8-2.8A9.5 9.5 0 0 0 3.4 6.9l3.2 2.5c.8-2.4 2.9-4.6 5.4-4.6Z"/>
+        </svg>
+      </span>
+      <span>Continue with Google</span>
+    </button>
+
+    <div class="divider">or use email</div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <label>
+        <span>Email</span>
+        <input type="email" formControlName="email" placeholder="you@example.com" />
+      </label>
+
+      @if (form.controls.email.invalid && form.controls.email.touched) {
+        <small class="validation">Enter a valid email address.</small>
+      }
+
+      <label>
+        <span>Password</span>
+        <input type="password" formControlName="password" placeholder="Your secure password" />
+      </label>
+
+      @if (form.controls.password.invalid && form.controls.password.touched) {
+        <small class="validation">Password must be at least 6 characters.</small>
+      }
+
+      @if (errorMessage()) {
+        <p class="error-banner">{{ errorMessage() }}</p>
+      }
+
+      <button class="primary-button" type="submit" [disabled]="auth.busy()">
+        {{ auth.busy() ? 'Signing you in...' : 'Open dashboard' }}
+      </button>
+    </form>
+
+    <p class="switch-copy">
+      New here?
+      <a routerLink="/auth/signup">Create an account</a>
+    </p>
+  </div>
+</section>

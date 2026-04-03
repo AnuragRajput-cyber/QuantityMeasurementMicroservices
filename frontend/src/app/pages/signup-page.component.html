@@ -1,0 +1,63 @@
+<section class="signup-layout">
+  <div class="panel signup-card">
+    <p class="eyebrow">Create your space</p>
+    <h1>Launch a secure quantity workspace in one minute.</h1>
+    <p class="lede">
+      Your backend already separates auth, gateway, and measurement logic. This frontend simply
+      gives it a clear, premium surface to live in.
+    </p>
+
+    <ul class="highlights">
+      <li>JWT-based access stored locally for your protected routes</li>
+      <li>Google login still available from the sign-in screen</li>
+      <li>Instant access to compare, convert, divide, add, and subtract tools</li>
+    </ul>
+  </div>
+
+  <div class="panel form-card">
+    <div class="form-head">
+      <p class="eyebrow">Registration</p>
+      <h2>Sign up</h2>
+      <p>Use the same fields your `auth-service` expects: name, email, and password.</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <label>
+        <span>Full name</span>
+        <input type="text" formControlName="name" placeholder="Anurag Sharma" />
+      </label>
+
+      <label>
+        <span>Email</span>
+        <input type="email" formControlName="email" placeholder="you@example.com" />
+      </label>
+
+      <label>
+        <span>Password</span>
+        <input type="password" formControlName="password" placeholder="Create a password" />
+      </label>
+
+      <label>
+        <span>Confirm password</span>
+        <input type="password" formControlName="confirmPassword" placeholder="Repeat password" />
+      </label>
+
+      @if (form.hasError('passwordMismatch') && form.controls.confirmPassword.touched) {
+        <small class="validation">Passwords do not match.</small>
+      }
+
+      @if (errorMessage()) {
+        <p class="error-banner">{{ errorMessage() }}</p>
+      }
+
+      <button class="primary-button" type="submit" [disabled]="auth.busy()">
+        {{ auth.busy() ? 'Creating account...' : 'Create account' }}
+      </button>
+    </form>
+
+    <p class="switch-copy">
+      Already have an account?
+      <a routerLink="/auth/login">Log in</a>
+    </p>
+  </div>
+</section>

@@ -1,0 +1,210 @@
+<section class="dashboard-grid">
+  <article class="welcome panel">
+    <div class="welcome-copy">
+      <p class="eyebrow">Measurement Workspace</p>
+      <h1>Welcome back, {{ auth.profile()?.name }}.</h1>
+      <p>
+        Pick an operation, enter your values, and get the result right away.
+      </p>
+    </div>
+
+    <div class="profile-strip">
+      <div class="profile-avatar">
+        @if (auth.profile()?.picture; as picture) {
+          <img [src]="picture" [alt]="auth.profile()?.name + ' profile'" />
+        } @else {
+          <span>{{ auth.profile()?.initials }}</span>
+        }
+      </div>
+
+      <div>
+        <h2>{{ auth.profile()?.name }}</h2>
+        <p>{{ auth.profile()?.email }}</p>
+      </div>
+
+      <span class="provider-pill">{{ auth.profile()?.provider }}</span>
+    </div>
+  </article>
+
+  <article class="panel operation-panel">
+    <div class="panel-header">
+      <div>
+        <p class="eyebrow">Calculator</p>
+        <h2>{{ selectedOperationMeta().title }} {{ selectedCategory() }}</h2>
+      </div>
+      <div class="panel-actions">
+        <p>{{ selectedOperationMeta().description }}</p>
+        <button type="button" class="history-toggle" (click)="toggleHistory()">
+          {{ showHistory() ? 'Hide history' : 'View history' }}
+        </button>
+      </div>
+    </div>
+
+    <div class="operation-cards">
+      @for (card of operationCards; track card.id) {
+        <button
+          type="button"
+          class="operation-card"
+          [class.active]="selectedOperation() === card.id"
+          (click)="selectOperation(card.id)"
+        >
+          <span class="accent-dot" [style.background]="card.accent"></span>
+          <strong>{{ card.title }}</strong>
+          <small>{{ card.description }}</small>
+        </button>
+      }
+    </div>
+
+    <div class="category-pills">
+      @for (category of categories; track category) {
+        <button
+          type="button"
+          [class.active]="selectedCategory() === category"
+          (click)="selectCategory(category)"
+        >
+          {{ category }}
+        </button>
+      }
+    </div>
+
+    <div class="workspace">
+      @if (isConvertOperation()) {
+        <div class="field-grid convert-grid">
+          <label>
+            <span>Value</span>
+            <input type="number" [ngModel]="leftValue()" (ngModelChange)="updateLeftValue($event)" />
+          </label>
+
+          <label>
+            <span>From unit</span>
+            <select [ngModel]="leftUnit()" (ngModelChange)="leftUnit.set($event)">
+              @for (unit of unitOptions(); track unit) {
+                <option [value]="unit">{{ unit }}</option>
+              }
+            </select>
+          </label>
+
+          <label>
+            <span>To unit</span>
+            <select [ngModel]="rightUnit()" (ngModelChange)="rightUnit.set($event)">
+              @for (unit of unitOptions(); track unit) {
+                <option [value]="unit">{{ unit }}</option>
+              }
+            </select>
+          </label>
+        </div>
+      } @else {
+        <div class="field-grid">
+          <label>
+            <span>First value</span>
+            <input type="number" [ngModel]="leftValue()" (ngModelChange)="updateLeftValue($event)" />
+          </label>
+
+          <label>
+            <span>First unit</span>
+            <select [ngModel]="leftUnit()" (ngModelChange)="leftUnit.set($event)">
+              @for (unit of unitOptions(); track unit) {
+                <option [value]="unit">{{ unit }}</option>
+              }
+            </select>
+          </label>
+
+          <label>
+            <span>Second value</span>
+            <input type="number" [ngModel]="rightValue()" (ngModelChange)="updateRightValue($event)" />
+          </label>
+
+          <label>
+            <span>Second unit</span>
+            <select [ngModel]="rightUnit()" (ngModelChange)="rightUnit.set($event)">
+              @for (unit of unitOptions(); track unit) {
+                <option [value]="unit">{{ unit }}</option>
+              }
+            </select>
+          </label>
+        </div>
+      }
+
+      @if (temperatureBlocked()) {
+        <p class="temperature-note">
+          Temperature only supports comparison and conversion in your backend. Switch the operation
+          or choose another category.
+        </p>
+      }
+
+      @if (errorMessage()) {
+        <p class="error-banner">{{ errorMessage() }}</p>
+      }
+
+      <div class="cta-row">
+        <button
+          type="button"
+          class="primary-button"
+          [disabled]="isBusy() || temperatureBlocked()"
+          (click)="runOperation()"
+        >
+          {{ isBusy() ? 'Processing...' : 'Run ' + selectedOperationMeta().title }}
+        </button>
+
+        <p class="helper-copy">
+          Choose matching units from the selected category.
+        </p>
+      </div>
+    </div>
+  </article>
+
+  <article class="panel result-panel">
+    @if (showHistory()) {
+      <div class="history-panel">
+        <div class="history-header">
+          <div>
+            <p class="eyebrow">History</p>
+            <h2>Recent operations</h2>
+          </div>
+          <button type="button" class="clear-history" [disabled]="!history().length" (click)="clearHistory()">
+            Clear
+          </button>
+        </div>
+
+        @if (history().length) {
+          <div class="history-list">
+            @for (entry of history(); track entry.id) {
+              <article class="history-item">
+                <div class="history-meta">
+                  <span>{{ entry.operation }}</span>
+                  <small>{{ formatTimestamp(entry.createdAt) }}</small>
+                </div>
+                <h3>{{ entry.summary }}</h3>
+                <p class="history-category">{{ entry.category }}</p>
+                <p class="history-result">
+                  <strong>{{ entry.resultLabel }}</strong>
+                  <span>{{ entry.resultDetail }}</span>
+                </p>
+              </article>
+            }
+          </div>
+        } @else {
+          <div class="placeholder-card compact-card">
+            <h2>No history yet</h2>
+            <p>Your successful operations will show up here.</p>
+          </div>
+        }
+      </div>
+    } @else {
+      <p class="eyebrow">Result</p>
+      @if (result(); as resultCard) {
+        <div class="result-card" [class.success]="resultCard.tone === 'success'" [class.warning]="resultCard.tone === 'warning'">
+          <h2>{{ resultCard.label }}</h2>
+          <p>{{ resultCard.detail }}</p>
+        </div>
+      } @else {
+        <div class="placeholder-card">
+          <h2>Result will appear here</h2>
+          <p>
+            Pick your category, enter values, and run the operation.
+          </p>
+        </div>
+      }
+    }
+  </article>
+</section>

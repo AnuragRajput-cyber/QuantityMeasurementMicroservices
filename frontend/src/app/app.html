@@ -1,0 +1,48 @@
+<div class="aurora aurora-left"></div>
+<div class="aurora aurora-right"></div>
+<div class="mesh"></div>
+
+<header class="topbar">
+  <a class="brand" routerLink="/dashboard">
+    <span class="brand-mark">
+      <span></span>
+    </span>
+    <span class="brand-copy">
+      <strong>QMA Nexus</strong>
+      <small>Auth + Gateway + Quantity Intelligence</small>
+    </span>
+  </a>
+
+  <nav class="nav-links">
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <a routerLink="/auth/login" routerLinkActive="active">Login</a>
+    <a routerLink="/auth/signup" routerLinkActive="active">Signup</a>
+  </nav>
+
+  <div class="profile-actions">
+    @if (profile(); as user) {
+      <div class="profile-card">
+        <div class="avatar">
+          @if (user.picture; as picture) {
+            <img [src]="picture" [alt]="user.name + ' avatar'" />
+          } @else {
+            <span>{{ user.initials }}</span>
+          }
+        </div>
+        <div class="profile-copy">
+          <strong>{{ user.name }}</strong>
+          <small>{{ user.email }}</small>
+        </div>
+      </div>
+
+      <button type="button" class="logout-button" (click)="logout()">Logout</button>
+    } @else {
+      <a class="ghost-button" routerLink="/auth/login">Sign in</a>
+      <a class="solid-button" routerLink="/auth/signup">Get started</a>
+    }
+  </div>
+</header>
+
+<main class="page-shell">
+  <router-outlet />
+</main>

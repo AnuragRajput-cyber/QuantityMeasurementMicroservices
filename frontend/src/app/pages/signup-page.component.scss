@@ -1,0 +1,125 @@
+.signup-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.signup-card,
+.form-card {
+  padding: 2rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+h1 {
+  margin: 0;
+  max-width: 12ch;
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  line-height: 0.98;
+}
+
+.lede,
+.form-head p:last-child {
+  color: var(--text-secondary);
+}
+
+.highlights {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.highlights li {
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.form-head h2 {
+  margin: 0.2rem 0 0.45rem;
+  font-size: 2rem;
+}
+
+form {
+  display: grid;
+  gap: 0.9rem;
+  margin-top: 1.3rem;
+}
+
+label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--text-secondary);
+}
+
+input {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(11, 16, 32, 0.76);
+  color: var(--text-primary);
+  font: inherit;
+}
+
+input:focus {
+  outline: none;
+  border-color: rgba(160, 129, 255, 0.6);
+  box-shadow: 0 0 0 4px rgba(160, 129, 255, 0.12);
+}
+
+.validation,
+.error-banner,
+.switch-copy {
+  margin: 0;
+}
+
+.validation {
+  color: var(--accent-amber);
+}
+
+.error-banner {
+  padding: 0.8rem 1rem;
+  border-radius: 0.95rem;
+  background: rgba(255, 102, 146, 0.12);
+  border: 1px solid rgba(255, 102, 146, 0.18);
+  color: #ffc3d4;
+}
+
+.primary-button {
+  margin-top: 0.35rem;
+  padding: 1rem 1.1rem;
+  border: 0;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #75f0c5, #66d1ff 50%, #8d7dff);
+  color: #07101c;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.switch-copy {
+  margin-top: 1rem;
+  color: var(--text-secondary);
+}
+
+.switch-copy a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .signup-layout {
+    grid-template-columns: 1fr;
+  }
+}

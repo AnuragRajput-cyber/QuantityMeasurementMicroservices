@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Signing you in...</title>
+  <script src="/app-config.js"></script>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at top, rgba(102, 209, 255, 0.2), transparent 30%),
+        linear-gradient(180deg, #0b1124, #050816 58%);
+      color: #f7f9ff;
+      font-family: Arial, sans-serif;
+    }
+
+    .card {
+      width: min(90vw, 28rem);
+      padding: 2rem;
+      border-radius: 1.6rem;
+      text-align: center;
+      background: rgba(18, 27, 50, 0.86);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 24px 60px rgba(2, 6, 23, 0.34);
+    }
+
+    .dot {
+      width: 14px;
+      height: 14px;
+      margin: 0 auto 1rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #75f0c5, #66d1ff);
+      animation: pulse 1.8s infinite;
+    }
+
+    p {
+      margin: 0;
+      color: #b4bfd7;
+    }
+
+    h1 {
+      margin: 0 0 0.7rem;
+      font-size: 1.8rem;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.55; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="dot"></div>
+    <h1>Completing Google sign-in</h1>
+    <p>Please wait while we store your token and move you into the dashboard.</p>
+  </div>
+
+  <script>
+    const appConfig = window.__QMA_CONFIG__ ?? {};
+    const authTokenKey = appConfig.authTokenKey;
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+
+    if (token && authTokenKey) {
+      localStorage.setItem(authTokenKey, token);
+      window.location.replace('/auth/oauth-success');
+    } else {
+      window.location.replace('/auth/login');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  --bg-primary: #050816;
+  --bg-secondary: #0b1124;
+  --panel-bg: linear-gradient(180deg, rgba(18, 27, 50, 0.86), rgba(9, 14, 28, 0.84));
+  --text-primary: #f7f9ff;
+  --text-secondary: #b4bfd7;
+  --text-muted: #7c88a8;
+  --accent-sky: #66d1ff;
+  --accent-lime: #75f0c5;
+  --accent-amber: #ffca6e;
+  --accent-pink: #ff77c8;
+  --accent-violet: #8d7dff;
+
+  margin: 0;
+  min-height: 100dvh;
+  background:
+    radial-gradient(circle at top, rgba(102, 209, 255, 0.18), transparent 30%),
+    radial-gradient(circle at 20% 80%, rgba(255, 119, 200, 0.14), transparent 28%),
+    linear-gradient(180deg, var(--bg-secondary), var(--bg-primary) 58%);
+  color: var(--text-primary);
+  font-family: 'Manrope', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.03em;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+.panel {
+  border-radius: 1.7rem;
+  background: var(--panel-bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 60px rgba(2, 6, 23, 0.34);
+  backdrop-filter: blur(22px);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  background: linear-gradient(180deg, rgba(102, 209, 255, 0.6), rgba(141, 125, 255, 0.75));
+}
