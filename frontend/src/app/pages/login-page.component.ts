@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../core/services/auth.service';
 
 @Component({
@@ -14,6 +14,7 @@ export class LoginPageComponent {
   protected readonly auth = inject(AuthService);
 
   private readonly fb = inject(FormBuilder);
+  private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
   readonly errorMessage = signal('');
@@ -22,6 +23,15 @@ export class LoginPageComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
+
+  constructor() {
+    const token = this.route.snapshot.queryParamMap.get('token');
+
+    if (token && this.auth.handleOAuthToken(token)) {
+      this.auth.refreshFromStorage();
+      void this.router.navigate(['/dashboard'], { replaceUrl: true });
+    }
+  }
 
   submit(): void {
     if (this.form.invalid) {
