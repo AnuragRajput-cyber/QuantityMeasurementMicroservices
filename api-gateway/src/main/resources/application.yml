@@ -1,11 +1,14 @@
 server:
   port: ${GATEWAY_PORT:8080}
+  forward-headers-strategy: framework
 
 spring:
   application:
     name: api-gateway
   cloud:
     gateway:
+      x-forwarded:
+        enabled: true
       globalcors:
         cors-configurations:
           '[/**]':
