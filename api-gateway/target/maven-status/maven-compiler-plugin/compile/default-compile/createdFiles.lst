@@ -1,0 +1,2 @@
+com\app\api_gateway\filter\JwtGatewayFilter.class
+com\app\api_gateway\ApiGatewayApplication.class

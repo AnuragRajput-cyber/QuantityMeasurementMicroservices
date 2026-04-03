@@ -1,0 +1,17 @@
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\config\OpenApiConfig.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\controller\QuantityMeasurementController.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\dto\ConvertRequest.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\dto\ErrorResponse.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\dto\QuantityDTO.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\enums\LengthUnit.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\enums\TemperatureUnit.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\enums\VolumeUnit.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\enums\WeightUnit.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\exception\GlobalExceptionHandler.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\exception\InvalidUnitException.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\model\Quantity.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\model\Unit.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\model\UnitCategory.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\QmaServiceApplication.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\service\IQuantityMeasurementService.java
+C:\Users\andre\OneDrive\Documents\Playground\qma-service\src\main\java\com\app\qma_service\service\QuantityMeasurementServiceImpl.java

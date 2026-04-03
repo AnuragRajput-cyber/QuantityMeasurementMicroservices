@@ -1,0 +1,36 @@
+server:
+  port: ${GATEWAY_PORT:8080}
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns:
+              - "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders:
+              - "*"
+            allowCredentials: false
+      routes:
+        - id: auth-service
+          uri: ${AUTH_SERVICE_URI}
+          predicates:
+            - Path=/auth/**,/oauth2/**,/login/**,/error/**
+        - id: qma-service
+          uri: ${QMA_SERVICE_URI}
+          predicates:
+            - Path=/api/**
+
+app:
+  security:
+    jwt:
+      secret: ${JWT_SECRET}

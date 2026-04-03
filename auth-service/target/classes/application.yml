@@ -1,0 +1,31 @@
+server:
+  port: ${AUTH_SERVICE_PORT:8081}
+
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: ${AUTH_DB_URL:jdbc:h2:file:./.data/auth-db}
+    username: ${AUTH_DB_USERNAME:sa}
+    password: ${AUTH_DB_PASSWORD:}
+    driver-class-name: ${AUTH_DB_DRIVER:org.h2.Driver}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: false
+  h2:
+    console:
+      enabled: true
+
+app:
+  security:
+    jwt:
+      secret: ${JWT_SECRET}
+      expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  frontend:
+    success-url: ${FRONTEND_SUCCESS_URL}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
