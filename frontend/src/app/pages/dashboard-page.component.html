@@ -1,10 +1,10 @@
 <section class="dashboard-grid">
   <article class="welcome panel">
     <div class="welcome-copy">
-      <p class="eyebrow">Measurement Workspace</p>
+      <p class="eyebrow">Measurement Dashboard</p>
       <h1>Welcome back, {{ auth.profile()?.name }}.</h1>
       <p>
-        Pick an operation, enter your values, and get the result right away.
+        Select an operation, enter your values, and get instant results.
       </p>
     </div>
 
@@ -35,7 +35,7 @@
       <div class="panel-actions">
         <p>{{ selectedOperationMeta().description }}</p>
         <button type="button" class="history-toggle" (click)="toggleHistory()">
-          {{ showHistory() ? 'Hide history' : 'View history' }}
+          {{ showHistory() ? 'Hide History' : 'View History' }}
         </button>
       </div>
     </div>
@@ -76,7 +76,7 @@
           </label>
 
           <label>
-            <span>From unit</span>
+            <span>From Unit</span>
             <select [ngModel]="leftUnit()" (ngModelChange)="leftUnit.set($event)">
               @for (unit of unitOptions(); track unit) {
                 <option [value]="unit">{{ unit }}</option>
@@ -85,7 +85,7 @@
           </label>
 
           <label>
-            <span>To unit</span>
+            <span>To Unit</span>
             <select [ngModel]="rightUnit()" (ngModelChange)="rightUnit.set($event)">
               @for (unit of unitOptions(); track unit) {
                 <option [value]="unit">{{ unit }}</option>
@@ -96,12 +96,12 @@
       } @else {
         <div class="field-grid">
           <label>
-            <span>First value</span>
+            <span>First Value</span>
             <input type="number" [ngModel]="leftValue()" (ngModelChange)="updateLeftValue($event)" />
           </label>
 
           <label>
-            <span>First unit</span>
+            <span>First Unit</span>
             <select [ngModel]="leftUnit()" (ngModelChange)="leftUnit.set($event)">
               @for (unit of unitOptions(); track unit) {
                 <option [value]="unit">{{ unit }}</option>
@@ -110,12 +110,12 @@
           </label>
 
           <label>
-            <span>Second value</span>
+            <span>Second Value</span>
             <input type="number" [ngModel]="rightValue()" (ngModelChange)="updateRightValue($event)" />
           </label>
 
           <label>
-            <span>Second unit</span>
+            <span>Second Unit</span>
             <select [ngModel]="rightUnit()" (ngModelChange)="rightUnit.set($event)">
               @for (unit of unitOptions(); track unit) {
                 <option [value]="unit">{{ unit }}</option>
@@ -127,8 +127,7 @@
 
       @if (temperatureBlocked()) {
         <p class="temperature-note">
-          Temperature only supports comparison and conversion in your backend. Switch the operation
-          or choose another category.
+          Temperature supports only conversion and comparison. Please choose a valid operation or category.
         </p>
       }
 
@@ -147,7 +146,7 @@
         </button>
 
         <p class="helper-copy">
-          Choose matching units from the selected category.
+          Select compatible units for accurate results.
         </p>
       </div>
     </div>
@@ -159,7 +158,7 @@
         <div class="history-header">
           <div>
             <p class="eyebrow">History</p>
-            <h2>Recent operations</h2>
+            <h2>Recent Activity</h2>
           </div>
           <button type="button" class="clear-history" [disabled]="!history().length" (click)="clearHistory()">
             Clear
@@ -186,7 +185,7 @@
         } @else {
           <div class="placeholder-card compact-card">
             <h2>No history yet</h2>
-            <p>Your successful operations will show up here.</p>
+            <p>Your completed operations will appear here.</p>
           </div>
         }
       </div>
@@ -199,9 +198,9 @@
         </div>
       } @else {
         <div class="placeholder-card">
-          <h2>Result will appear here</h2>
+          <h2>No result yet</h2>
           <p>
-            Pick your category, enter values, and run the operation.
+            Enter values and run an operation to see results here.
           </p>
         </div>
       }

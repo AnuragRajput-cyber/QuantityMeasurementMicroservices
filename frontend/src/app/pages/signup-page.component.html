@@ -1,35 +1,35 @@
 <section class="signup-layout">
   <div class="panel signup-card">
-    <p class="eyebrow">Create your space</p>
-    <h1>Launch a secure quantity workspace in one minute.</h1>
+    <p class="eyebrow">Get Started</p>
+    <h1>Create your Quantity Measurement account</h1>
     <p class="lede">
-      Your backend already separates auth, gateway, and measurement logic. This frontend simply
-      gives it a clear, premium surface to live in.
+      Sign up to access powerful tools for unit conversion, comparison, and calculation.
+      Manage your measurements quickly and efficiently in one place.
     </p>
 
     <ul class="highlights">
-      <li>JWT-based access stored locally for your protected routes</li>
-      <li>Google login still available from the sign-in screen</li>
-      <li>Instant access to compare, convert, divide, add, and subtract tools</li>
+      <li>Secure authentication for safe access</li>
+      <li>Fast and accurate unit conversions</li>
+      <li>All measurement tools in one dashboard</li>
     </ul>
   </div>
 
   <div class="panel form-card">
     <div class="form-head">
       <p class="eyebrow">Registration</p>
-      <h2>Sign up</h2>
-      <p>Use the same fields your `auth-service` expects: name, email, and password.</p>
+      <h2>Sign Up</h2>
+      <p>Enter your details to create your account.</p>
     </div>
 
     <form [formGroup]="form" (ngSubmit)="submit()">
       <label>
-        <span>Full name</span>
-        <input type="text" formControlName="name" placeholder="Anurag Sharma" />
+        <span>Full Name</span>
+        <input type="text" formControlName="name" placeholder="Enter your full name" />
       </label>
 
       <label>
-        <span>Email</span>
-        <input type="email" formControlName="email" placeholder="you@example.com" />
+        <span>Email Address</span>
+        <input type="email" formControlName="email" placeholder="Enter your email" />
       </label>
 
       <label>
@@ -38,8 +38,8 @@
       </label>
 
       <label>
-        <span>Confirm password</span>
-        <input type="password" formControlName="confirmPassword" placeholder="Repeat password" />
+        <span>Confirm Password</span>
+        <input type="password" formControlName="confirmPassword" placeholder="Re-enter password" />
       </label>
 
       @if (form.hasError('passwordMismatch') && form.controls.confirmPassword.touched) {
@@ -51,13 +51,13 @@
       }
 
       <button class="primary-button" type="submit" [disabled]="auth.busy()">
-        {{ auth.busy() ? 'Creating account...' : 'Create account' }}
+        {{ auth.busy() ? 'Creating account...' : 'Create Account' }}
       </button>
     </form>
 
     <p class="switch-copy">
       Already have an account?
-      <a routerLink="/auth/login">Log in</a>
+      <a routerLink="/auth/login">Sign in</a>
     </p>
   </div>
 </section>

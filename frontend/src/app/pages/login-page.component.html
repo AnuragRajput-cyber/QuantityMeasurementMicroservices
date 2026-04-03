@@ -1,36 +1,35 @@
 <section class="auth-page">
   <div class="auth-copy">
-    <p class="eyebrow">Gateway-secured workspace</p>
-    <h1>Operate your quantity engine from one calm, fast command center.</h1>
+    <p class="eyebrow">Secure Measurement Platform</p>
+    <h1>Quantity Measurement System</h1>
     <p class="lede">
-      Sign in with your local account or jump in with Google OAuth through the API gateway.
-      Your dashboard is ready to convert, compare, divide, and track measurements instantly.
+      Log in to access your smart measurement dashboard. Convert units, perform calculations,
+      and manage quantities efficiently with secure authentication.
     </p>
 
     <div class="feature-grid">
       <article>
         <span>01</span>
-        <h2>Single login surface</h2>
-        <p>Local JWT auth and Google OAuth share one polished flow.</p>
+        <h2>Unit Support</h2>
+        <p>Work with multiple measurement units across different categories.</p>
       </article>
       <article>
         <span>02</span>
-        <h2>Protected QMA tools</h2>
-        <p>Every quantity action routes through your secured gateway on port 8080.</p>
+        <h2>Conversion</h2>
+        <p>Convert values instantly with accurate and reliable results.</p>
       </article>
       <article>
         <span>03</span>
-        <h2>Dark cockpit feel</h2>
-        <p>Gradient glass panels keep the workspace bold without getting noisy.</p>
+        <h2>Calculation</h2>
+        <p>Perform quick quantity-based calculations with ease.</p>
       </article>
     </div>
   </div>
 
   <div class="auth-card panel">
     <div class="card-header">
-      <p class="eyebrow">Welcome back</p>
-      <h2>Log in</h2>
-      <p>Use the same account you created in `auth-service`, or continue with Google.</p>
+      <p class="eyebrow">Welcome Back</p>
+      <h2>Sign In</h2>
     </div>
 
     <button type="button" class="google-button" (click)="loginWithGoogle()">
@@ -45,21 +44,21 @@
       <span>Continue with Google</span>
     </button>
 
-    <div class="divider">or use email</div>
+    <div class="divider">or sign in with email</div>
 
     <form [formGroup]="form" (ngSubmit)="submit()">
       <label>
-        <span>Email</span>
-        <input type="email" formControlName="email" placeholder="you@example.com" />
+        <span>Email Address</span>
+        <input type="email" formControlName="email" placeholder="Enter your email" />
       </label>
 
       @if (form.controls.email.invalid && form.controls.email.touched) {
-        <small class="validation">Enter a valid email address.</small>
+        <small class="validation">Please enter a valid email.</small>
       }
 
       <label>
         <span>Password</span>
-        <input type="password" formControlName="password" placeholder="Your secure password" />
+        <input type="password" formControlName="password" placeholder="Enter your password" />
       </label>
 
       @if (form.controls.password.invalid && form.controls.password.touched) {
@@ -71,13 +70,13 @@
       }
 
       <button class="primary-button" type="submit" [disabled]="auth.busy()">
-        {{ auth.busy() ? 'Signing you in...' : 'Open dashboard' }}
+        {{ auth.busy() ? 'Signing in...' : 'Go to Dashboard' }}
       </button>
     </form>
 
     <p class="switch-copy">
-      New here?
-      <a routerLink="/auth/signup">Create an account</a>
+      Don't have an account?
+      <a routerLink="/auth/signup">Sign up</a>
     </p>
   </div>
 </section>
