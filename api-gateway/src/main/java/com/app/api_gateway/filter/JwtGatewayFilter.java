@@ -27,7 +27,11 @@ public class JwtGatewayFilter implements GlobalFilter, Ordered {
             "/auth/",
             "/oauth2/",
             "/login/",
-            "/error"
+            "/error",
+            "/swagger-ui",
+            "/v3/api-docs",
+            "/docs/auth/v3/api-docs",
+            "/docs/qma/v3/api-docs"
     );
 
     private final SecretKey key;
