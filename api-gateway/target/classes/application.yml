@@ -1,11 +1,14 @@
 server:
   port: ${GATEWAY_PORT:8080}
+  forward-headers-strategy: framework
 
 spring:
   application:
     name: api-gateway
   cloud:
     gateway:
+      x-forwarded:
+        enabled: true
       globalcors:
         cors-configurations:
           '[/**]':
@@ -25,12 +28,33 @@ spring:
           uri: ${AUTH_SERVICE_URI}
           predicates:
             - Path=/auth/**,/oauth2/**,/login/**,/error/**
+        - id: auth-service-openapi
+          uri: ${AUTH_SERVICE_URI}
+          predicates:
+            - Path=/docs/auth/v3/api-docs/**
+          filters:
+            - RewritePath=/docs/auth/(?<segment>.*), /${segment}
         - id: qma-service
           uri: ${QMA_SERVICE_URI}
           predicates:
             - Path=/api/**
+        - id: qma-service-openapi
+          uri: ${QMA_SERVICE_URI}
+          predicates:
+            - Path=/docs/qma/v3/api-docs/**
+          filters:
+            - RewritePath=/docs/qma/(?<segment>.*), /${segment}
 
 app:
   security:
     jwt:
       secret: ${JWT_SECRET}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: auth-service
+        url: /docs/auth/v3/api-docs
+      - name: qma-service
+        url: /docs/qma/v3/api-docs

@@ -1,5 +1,6 @@
 package com.app.qma_service.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,13 +15,9 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/quantity")
 public class QuantityMeasurementController {
-
+    @Autowired
     private final IQuantityMeasurementService service;
-
-    public QuantityMeasurementController(IQuantityMeasurementService service) {
-        this.service = service;
-    }
-
+    
     @PostMapping("/add")
     public QuantityDTO add(@Valid @RequestBody QuantityDTO[] quantities) {
         validatePair(quantities);
