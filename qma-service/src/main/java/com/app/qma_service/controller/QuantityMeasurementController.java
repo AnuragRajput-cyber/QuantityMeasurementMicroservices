@@ -15,8 +15,12 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/quantity")
 public class QuantityMeasurementController {
-    @Autowired
+
     private final IQuantityMeasurementService service;
+
+     public QuantityMeasurementController(IQuantityMeasurementService service) {
+        this.service = service;
+    }
     
     @PostMapping("/add")
     public QuantityDTO add(@Valid @RequestBody QuantityDTO[] quantities) {
